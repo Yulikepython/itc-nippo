@@ -20,7 +20,10 @@ def nippoDetailView(request, pk):
 
 def nippoCreateView(request):
     template_name="nippo/nippo-form.html"
-    title = request.POST["title"]
-    content = request.POST["content"]
+    if request.POST:
+        title = request.POST["title"]
+        content = request.POST["content"]
+        obj = NippoModel(title=title, content=content)
+        obj.save()
     
     return render(request, template_name)
